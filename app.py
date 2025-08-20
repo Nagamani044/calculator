@@ -1,8 +1,14 @@
-from kivy.app import App
-from kivy.uix.button import Button
+from calculator import add, subtract, multiply, divide
 
-class MyApp(App):
-    def build(self):
-        return Button(text='Hello, Kivy!')
+def run_calculator():
+    print("Simple Calculator")
+    a = float(input("Enter first number: "))
+    b = float(input("Enter second number: "))
 
-MyApp().run()
+    print("Add:", add(a, b))
+    print("Subtract:", subtract(a, b))
+    print("Multiply:", multiply(a, b))
+    try:
+        print("Divide:", divide(a, b))
+    except ZeroDivisionError as e:
+        print("Error:", e)
