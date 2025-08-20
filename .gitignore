@@ -1,49 +1,22 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*$py.class
+*.pyo
 
-# PyCharm project files
-.idea/
-
-# VS Code settings (if you ever use it)
-.vscode/
-
-# Environment files
-.env
-*.env
-
-# Virtual environment folders
+# Virtual environment
 venv/
 env/
-ENV/
-.venv/
 
-# macOS system files
+# IDE settings
+.vscode/
+.idea/
+
+# OS files
 .DS_Store
-
-# Windows system files
 Thumbs.db
 
-# Log files
+# Python logs
 *.log
 
-# Test coverage reports
-htmlcov/
-.coverage
-coverage.xml
-*.cover
-
-# Python egg files
-*.egg
-*.egg-info/
-dist/
-build/
-
-# Jupyter Notebook checkpoints
-.ipynb_checkpoints/
-
-# Cache and temp files
-*.bak
-*.swp
-*.tmp
+# Test cache
+.pytest_cache/
