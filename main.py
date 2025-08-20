@@ -1,8 +1,4 @@
-from kivy.app import App
-from kivy.uix.label import Label
+from app import run_calculator
 
-class MyApp(App):
-    def build(self):
-        return Label(text="Hello, World!")
-
-MyApp().run()
+if __name__ == "__main__":
+    run_calculator()
