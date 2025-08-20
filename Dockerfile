@@ -1,11 +1,17 @@
-# Use official Python image
-FROM python:3.11-slim
+# Use an official Python base image
+FROM python:3.13-slim
 
 # Set working directory inside the container
 WORKDIR /app
 
-# Copy the calculator script into the container
-COPY calculator.py .
+# Copy all project files into the container
+COPY . .
 
-# Set default command to run the script (you can change this if needed)
-CMD ["python", "calculator.py"]
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose the Flask default port
+EXPOSE 5000
+
+# Run the Flask API
+CMD ["python", "api.py"]
