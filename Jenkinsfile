@@ -1,43 +1,58 @@
 pipeline {
-    agent label ''
-
-    environment {
-       AWS_CREDENTIALS_ID = credentials'fbcb35b9-53fe-49cf-9256-220408940364'  // Replace with actual AWS credential ID
+    agent {
+        docker {
+            image 'python:3.10' // Replace with your preferred image
+            args '-u root'      // Optional: run as root if needed
+        }
     }
 
-    parameters {
-        choice(name: 'ACTION', choices: ['apply', 'destroy'], description: 'Choose Terraform action')
+    environment {
+        APP_NAME = 'calculator'
     }
 
     stages {
-        stage('Checkout SCM') {
+        stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Nagamani044/calculator.git'
+                echo 'Checking out source code...'
+                checkout scm
             }
         }
 
-        stage('Initialize Terraform') {
+        stage('Install Dependencies') {
             steps {
-                sh 'terraform init'
+                echo 'Installing dependencies...'
+                sh 'pip install -r requirements.txt'
             }
         }
 
-        stage('Plan Terraform') {
+        stage('Run Tests') {
             steps {
-                sh 'terraform plan -out=tfplan'
+                echo 'Running tests...'
+                sh 'pytest tests/'
             }
         }
 
-        stage('Apply or Destroy') {
+        stage('Build') {
             steps {
-                script {
-                    if (params.ACTION == 'apply') {
-                        sh 'terraform apply -auto-approve tfplan'
-                    } else {
-                        sh 'terraform destroy -auto-approve'
-                    }
-                }
+                echo "Building $APP_NAME..."
+                // Add build steps here if applicable
             }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying $APP_NAME..."
+                // Add deployment steps here if needed
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '🎉 Pipeline completed successfully!'
+        }
+        failure {
+            echo '❌ Pipeline failed. Check logs for details.'
         }
     }
 }
