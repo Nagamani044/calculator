@@ -1,19 +1,44 @@
-# calculator.py
-def add(a, b):
-    return a + b
+def add(x, y):
+    return x + y
 
-def subtract(a, b):
-    return a - b
+def subtract(x, y):
+    return x - y
 
-def multiply(a, b):
-    return a * b
+def multiply(x, y):
+    return x * y
 
-def divide(a, b):
-    if b == 0:
-        raise ZeroDivisionError("Cannot divide by zero!")
-        return a / b
-    if __name__ == "__main__":
-        print("Add:", add(5, 3))
-        print("Subtract:", subtract(10, 4))
-        print("Multiply:", multiply(2, 6))
-        print("Divide:", divide(8, 2))
+def divide(x, y):
+    if y == 0:
+        return "Error: Division by zero!"
+    return x / y
+
+def calculator():
+    print("Simple Calculator")
+    print("Choose operation:")
+    print("1. Add\n2. Subtract\n3. Multiply\n4. Divide")
+
+    choice = input("Enter choice (1/2/3/4): ")
+
+    if choice not in ('1', '2', '3', '4'):
+        print("Invalid choice.")
+        return
+
+    try:
+        num1 = float(input("Enter first number: "))
+        num2 = float(input("Enter second number: "))
+    except ValueError:
+        print("Invalid input. Please enter numeric values.")
+        return
+
+    operations = {
+        '1': add,
+        '2': subtract,
+        '3': multiply,
+        '4': divide
+    }
+
+    result = operations[choice](num1, num2)
+    print(f"Result: {result}")
+
+if __name__ == "__main__":
+    calculator()
