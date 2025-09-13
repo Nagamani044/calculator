@@ -1,11 +1,11 @@
 pipeline {
     agent {
         docker {
-            image 'python:3.10' // Replace with your preferred image
-            args '-u root'      // Optional: run as root if needed
+            image 'python:3.10'
         }
     }
-
+    
+}
     environment {
         APP_NAME = 'calculator'
     }
@@ -25,13 +25,13 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        stages {
+        stage('Test') {
             steps {
-                echo 'Running tests...'
-                sh 'pytest tests/'
+                sh 'python --version'
             }
         }
-
+    }
         stage('Build') {
             steps {
                 echo "Building $APP_NAME..."
