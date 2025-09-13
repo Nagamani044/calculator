@@ -1,10 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.10'
+    agent any
+    stages {
+        stage('Check Docker') {
+            steps {
+                sh 'docker ps'
+            }
         }
     }
-    
 }
     environment {
         APP_NAME = 'calculator'
